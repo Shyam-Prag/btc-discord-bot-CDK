@@ -27,13 +27,16 @@ export class BtcDiscordBotCdkStack extends cdk.Stack {
         BTC_URL: BTC_URL,
         DISCORD_WEBHOOK_URL: DISCORD_WEBHOOK_URL
       },
+      tracing: lambda.Tracing.ACTIVE,
     });
     
     
     const btcFunctionRole = new iam.Role(this, 'btcFunctionRole', {
       roleName: `${LAMBDA_ROLE}`,
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
-      managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole')],
+      managedPolicies: [
+        iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole'),
+        ],
     });
     
     // add eventbridge cron job 
@@ -41,11 +44,9 @@ export class BtcDiscordBotCdkStack extends cdk.Stack {
       schedule: events.Schedule.expression('rate(4 hours)')
     });
     
-    cronRule.addTarget(new targets.LambdaFunction(btcFunction))
+    cronRule.addTarget(new targets.LambdaFunction(btcFunction));
     
-    
-    
-    //random comment test
-    
+    //random comment
+  
   }
 }

@@ -7,3 +7,5 @@ const app = new cdk.App();
 new BtcDiscordBotCdkStack(app, 'BtcDiscordBotCdkStack', {
 
 });
+
+cdk.Tags.of(app).add("auto-delete", "no")
