@@ -1,0 +1,6 @@
+discord-webhook
+discordwebhook
+pillow
+boto3 
+requests
+aws-xray-sdk
