@@ -59,9 +59,9 @@ export class BtcDiscordBotCdkStack extends cdk.Stack {
       comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
       evaluationPeriods: 1,
       treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
-      actionsEnabled: new cloudwatch.AlarmAction(topic),
-      
+      actionsEnabled: true,
     })
+    lambdaAlarm.addAlarmAction(new SnsAction(topic));
     
     // add eventbridge cron job 
     const cronRule = new events.Rule(this, 'CronRule', {
